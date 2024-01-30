@@ -163,3 +163,20 @@ def populate_seasons_table():
             my_cursor.close()
             db.rollback()
             db.close
+
+def determine_last_entry():
+    #connect to database
+    db = mysql.connector.connect(
+    host = 'localhost',
+    user = 'root',
+    passwd = '8ad7fpx2!',
+    database = 'nhlStats'
+    )
+    my_cursor = db.cursor()
+    my_cursor.execute('SELECT playerId FROM players ORDER BY playerId DESC LIMIT 1')
+    last_entry_id_tuple = my_cursor.fetchone()
+    last_entry_id = last_entry_id_tuple[0]
+    my_cursor.close()
+    db.close()
+    print(last_entry_id)
+    return last_entry_id
