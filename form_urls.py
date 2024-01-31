@@ -37,12 +37,8 @@ def form_list_of_player_urls_and_ids(alphabet_url, last_entry):
         else:
             player_url_and_id_list.clear()
 
-    # for player in player_url_and_id_list:
-    #     for id, url in player_dict.items():
-    #         if id == f'"{last_entry}"':
-    #             remove_index = player_url_and_id_list.index(player)
-
-    # player_url_and_id_list = player_url_and_id_list[remove_index + 1:]
-
-    print(player_url_and_id_list)
+    if len(player_url_and_id_list) == 0:
+        print('All players have been added to the database')
+        quit()
+    print(f'Starting with {player_url_and_id_list[0]}')
     return player_url_and_id_list
