@@ -175,8 +175,11 @@ def determine_last_entry():
     my_cursor = db.cursor()
     my_cursor.execute('SELECT playerId FROM players ORDER BY playerId DESC LIMIT 1')
     last_entry_id_tuple = my_cursor.fetchone()
-    last_entry_id = last_entry_id_tuple[0]
-    my_cursor.close()
-    db.close()
-    print(last_entry_id)
-    return last_entry_id
+    if last_entry_id_tuple is not None:
+        last_entry_id = last_entry_id_tuple[0]
+        my_cursor.close()
+        db.close()
+        return last_entry_id
+    else:
+         my_cursor.close()
+         db.close()

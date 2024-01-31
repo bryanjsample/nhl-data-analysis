@@ -5,9 +5,10 @@ from time import sleep
 def form_list_of_alphabet_urls(last_entry):
     alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
     alphabet_url_list = []
-    last_letter = last_entry[0]
-    index = alphabet.index(last_letter)
-    alphabet = alphabet[index:]
+    if last_entry is not None:
+        last_letter = last_entry[0]
+        index = alphabet.index(last_letter)
+        alphabet = alphabet[index:]
 
     for letter in alphabet:
         url = f'https://www.hockey-reference.com/players/{letter}/'

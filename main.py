@@ -12,7 +12,7 @@ import database_and_sql
 
 def main():
     last_entry = database_and_sql.determine_last_entry()
-    # database_and_sql.populate_seasons_table()
+    database_and_sql.populate_seasons_table()
     alphabet_url_list = form_urls.form_list_of_alphabet_urls(last_entry)
     print(alphabet_url_list)
     for alphabet_url in alphabet_url_list:
