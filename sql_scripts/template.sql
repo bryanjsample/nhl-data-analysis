@@ -1,9 +1,5 @@
 CREATE DATABASE nhlStats;
 
-
-USE nhlStats;
-
-
 CREATE TABLE players (
 	playerId VARCHAR(15) PRIMARY KEY,
 	firstName VARCHAR(20),

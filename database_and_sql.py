@@ -181,5 +181,65 @@ def determine_last_entry():
         db.close()
         return last_entry_id
     else:
-         my_cursor.close()
-         db.close()
+        my_cursor.close()
+        db.close()
+
+def check_if_db_exists():
+    try:
+        #connect to database
+        db = mysql.connector.connect(
+        host = 'localhost',
+        user = 'root',
+        passwd = '8ad7fpx2!'
+        )
+        my_cursor = db.cursor(buffered=True)
+        my_cursor.execute('SHOW DATABASES LIKE "nhlStats"')
+        database = my_cursor.fetchone()
+        my_cursor.close()
+        db.close()
+        if database is None:
+            create_nhlStats_database()
+        else:
+            pass
+    except Exception as e:
+        print(e)
+        raise
+
+def create_nhlStats_database():
+    queries = sql_script_to_queries(script_name='./sql_scripts/template.sql')
+    for query in queries:
+        try:
+            #connect to database
+            db = mysql.connector.connect(
+            host = 'localhost',
+            user = 'root',
+            passwd = '8ad7fpx2!',
+            database = 'nhlStats'
+            )
+        except:
+            #connect to database
+            db = mysql.connector.connect(
+            host = 'localhost',
+            user = 'root',
+            passwd = '8ad7fpx2!'
+            )
+        my_cursor = db.cursor()
+        my_cursor.execute(query)
+        print(query)
+        db.commit()
+        my_cursor.close()
+        db.close()
+
+def sql_script_to_queries(script_name):
+    with open(script_name, 'r') as script:
+        script_queries = script.read()
+    queries = script_queries.split(';')
+    for query in queries:
+        if query.strip() == '':
+            queries.pop(queries.index(query))
+    return queries
+
+    
+    
+
+

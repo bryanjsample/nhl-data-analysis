@@ -11,6 +11,7 @@ import scrape_stats
 import database_and_sql
 
 def main():
+    database_and_sql.check_if_db_exists()
     last_entry = database_and_sql.determine_last_entry()
     database_and_sql.populate_seasons_table()
     alphabet_url_list = form_urls.form_list_of_alphabet_urls(last_entry)
