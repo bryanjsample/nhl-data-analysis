@@ -173,7 +173,7 @@ def determine_last_entry():
     database = 'nhlStats'
     )
     my_cursor = db.cursor()
-    my_cursor.execute('SELECT playerId FROM players ORDER BY playerId DESC LIMIT 1')
+    my_cursor.execute('SELECT playerId FROM players ORDER BY lastName DESC, firstName DESC LIMIT 1')
     last_entry_id_tuple = my_cursor.fetchone()
     if last_entry_id_tuple is not None:
         last_entry_id = last_entry_id_tuple[0]

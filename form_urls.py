@@ -16,6 +16,7 @@ def form_list_of_alphabet_urls(last_entry):
     return alphabet_url_list
 
 def form_list_of_player_urls_and_ids(alphabet_url, last_entry):
+    alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
     player_url_and_id_list = []
     letter = alphabet_url[-2]
     base_url = alphabet_url.replace(f'/players/{letter}/', '')
@@ -29,7 +30,9 @@ def form_list_of_player_urls_and_ids(alphabet_url, last_entry):
         player_a = player_p.find('a')
         player_shortened_url = player_a.get('href')
         player_id = player_shortened_url.replace('.html', '')
-        player_id = '"' + player_id.replace(f'/players/{letter}/', '') + '"'
+        for alpha_letter in alphabet:
+            if f'/players/{alpha_letter}/' in player_id:
+                player_id = '"' + player_id.replace(f'/players/{alpha_letter}/', '') + '"'
         if player_id != f'"{last_entry}"':
             player_url = base_url + player_shortened_url
             player_dict = {player_id : player_url}

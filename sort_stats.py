@@ -13,8 +13,16 @@ def sort_player_info(soup, player_url, player_id):
         name = soup.find('h1').get_text()
     name = name.replace('\n', '')
     name_list = name.split(sep = ' ')
-    first_name = '"' + name_list[0] + '"'
-    last_name = '"' + name_list[-1] + '"'
+    if len(name_list) > 2:
+        first_name = '"' + name_list[0] + '"'
+        last_name = '"'
+        for i in name_list[1:]:
+            last_name += i + ' '
+        last_name = last_name[:-1]
+        last_name+= '"'
+    else:
+        first_name = '"' + name_list[0] + '"'
+        last_name = '"' + name_list[-1] + '"'
     print(f'\n\nName: {first_name} {last_name}')
 
     # find player info
@@ -102,10 +110,9 @@ def sort_player_info(soup, player_url, player_id):
                 birthdate = f'"{birth_year}-{birth_month}-{birth_day}"'
 
                 # find birth location (city and country / state / province)
-                birth_location = birth_details_list[1].replace(',', '')
-                birth_location_items = birth_location.split(' ')
-                birth_location_primary = '"' + birth_location_items[0] + '"'
-                birth_location_secondary = '"' + birth_location_items[1] + '"'
+                birth_location_items = birth_details_list[1].split(',',)
+                birth_location_primary = f'"{birth_location_items[0].strip()}"'
+                birth_location_secondary = f'"{birth_location_items[1].strip()}"'
 
                 #find birth country code
                 birth_country = '"' + birth_details_list[2].upper() + '"'
