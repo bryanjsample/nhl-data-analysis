@@ -21,14 +21,14 @@ def main():
             for alphabet_url in alphabet_url_list:
                 # find all players listed under each letter
                 player_url_and_id_list = form_urls.form_list_of_player_urls_and_ids(alphabet_url, last_entry)
-
-                # obtain list of dictionaries
-                for player in player_url_and_id_list:
-                    # obtain key value pairs from  each dictionary
-                    for player_id, player_url in player.items():
-                        # obtain table data and add into databases
-                        player_list_and_all_seasons = scrape_stats.find_web_elements(player_url, player_id)
-                        database_and_sql.add_data_to_database(player_list_and_all_seasons)
+                if player_url_and_id_list is not None:
+                    # obtain list of dictionaries
+                    for player in player_url_and_id_list:
+                        # obtain key value pairs from  each dictionary
+                        for player_id, player_url in player.items():
+                            # obtain table data and add into databases
+                            player_list_and_all_seasons = scrape_stats.find_web_elements(player_url, player_id)
+                            database_and_sql.add_data_to_database(player_list_and_all_seasons)
         except KeyboardInterrupt:
             quit()
         else:

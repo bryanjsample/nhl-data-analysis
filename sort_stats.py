@@ -111,8 +111,12 @@ def sort_player_info(soup, player_url, player_id):
 
                 # find birth location (city and country / state / province)
                 birth_location_items = birth_details_list[1].split(',',)
-                birth_location_primary = f'"{birth_location_items[0].strip()}"'
-                birth_location_secondary = f'"{birth_location_items[1].strip()}"'
+                if len(birth_location_items) == 1:
+                    birth_location_primary = "NULL"
+                    birth_location_secondary = f'"{birth_location_items[0].strip()}"'
+                else:
+                    birth_location_primary = f'"{birth_location_items[0].strip()}"'
+                    birth_location_secondary = f'"{birth_location_items[1].strip()}"'
 
                 #find birth country code
                 birth_country = '"' + birth_details_list[2].upper() + '"'

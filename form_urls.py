@@ -39,9 +39,10 @@ def form_list_of_player_urls_and_ids(alphabet_url, last_entry):
             player_url_and_id_list.append(player_dict)
         else:
             player_url_and_id_list.clear()
-
-    if len(player_url_and_id_list) == 0:
-        print('All players have been added to the database')
-        quit()
+    if letter == 'z' and len(player_url_and_id_list) == 0:
+            print('All players have been added to the database')
+            quit()
+    elif len(player_url_and_id_list) == 0:
+        return None
     print(f'Starting with {player_url_and_id_list[0]}')
     return player_url_and_id_list
