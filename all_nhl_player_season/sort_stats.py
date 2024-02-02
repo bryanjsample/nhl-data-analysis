@@ -117,9 +117,19 @@ def sort_player_info(soup, player_url, player_id):
                 else:
                     birth_location_primary = f'"{birth_location_items[0].strip()}"'
                     birth_location_secondary = f'"{birth_location_items[1].strip()}"'
-
                 #find birth country code
                 birth_country = '"' + birth_details_list[2].upper() + '"'
+            elif len(birth_details_list) == 2:
+                # find birthdate
+                full_birthdate = birth_details_list[0].replace(',', '')
+                birthdate_items = full_birthdate.split(' ')
+                birth_month = determine_numeric_month(birthdate_items[0])
+                birth_day = birthdate_items[1]
+                if len(birth_day) ==1:
+                    birth_day = '0' + birth_day
+                birth_year = birthdate_items[2]
+                birthdate = f'"{birth_year}-{birth_month}-{birth_day}"'
+
 
         # find height and weight
         elif 'lb' in info and 'cm' in info and 'kg' in info:

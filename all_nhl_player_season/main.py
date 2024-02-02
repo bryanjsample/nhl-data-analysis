@@ -16,7 +16,15 @@ def main():
     while True:
         try:
             database_and_sql.check_if_db_exists(password)
-            last_entry = database_and_sql.determine_last_entry(password)
+            while True:
+                skip = input("Manually enter last playerId (s to skip): ")
+                if skip == 's':
+                    last_entry = database_and_sql.determine_last_entry(password)
+                    break
+                elif len(skip) <= 9:
+                    if skip[-2] == '0':
+                        last_entry = skip
+                        break
             database_and_sql.populate_seasons_table(password)
             alphabet_url_list = form_urls.form_list_of_alphabet_urls(last_entry)
             for alphabet_url in alphabet_url_list:

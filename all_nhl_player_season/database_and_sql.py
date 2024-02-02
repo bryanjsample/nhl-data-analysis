@@ -198,7 +198,7 @@ def check_if_db_exists(password):
         my_cursor.close()
         db.close()
         if database is None:
-            create_nhlStats_database()
+            create_nhlStats_database(password)
         else:
             pass
     except Exception as e:
