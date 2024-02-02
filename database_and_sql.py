@@ -1,6 +1,6 @@
 import mysql.connector
 
-def add_data_to_database(player_list_and_all_seasons):
+def add_data_to_database(player_list_and_all_seasons, password):
     player_commited = False
 
     list_of_all_seasons = player_list_and_all_seasons[1]
@@ -48,7 +48,7 @@ def add_data_to_database(player_list_and_all_seasons):
                 db = mysql.connector.connect(
                     host = 'localhost',
                     user = 'root',
-                    passwd = '8ad7fpx2!',
+                    passwd = password,
                     database = 'nhlStats'
                 )
                 my_cursor = db.cursor()
@@ -108,12 +108,12 @@ def build_sql_statement(table, list_of_dicts):
     print(sql_statement)
     return sql_statement
     
-def add_team_to_database(team_name):
+def add_team_to_database(team_name, password):
     # instantiate database
     db = mysql.connector.connect(
         host = 'localhost',
         user = 'root',
-        passwd = '8ad7fpx2!',
+        passwd = password,
         database = 'nhlStats'
     )
     my_cursor = db.cursor()
@@ -127,7 +127,7 @@ def add_team_to_database(team_name):
         my_cursor.close()
         db.close()
 
-def populate_seasons_table():
+def populate_seasons_table(password):
     years = range(1900,2025)
     for year in years:
         season_start = f'{year}-09-01'
@@ -151,7 +151,7 @@ def populate_seasons_table():
             db = mysql.connector.connect(
                 host = 'localhost',
                 user = 'root',
-                passwd = '8ad7fpx2!',
+                passwd = password,
                 database = 'nhlStats'
             )
             my_cursor = db.cursor()
@@ -164,12 +164,12 @@ def populate_seasons_table():
             db.rollback()
             db.close
 
-def determine_last_entry():
+def determine_last_entry(password):
     #connect to database
     db = mysql.connector.connect(
     host = 'localhost',
     user = 'root',
-    passwd = '8ad7fpx2!',
+    passwd = password,
     database = 'nhlStats'
     )
     my_cursor = db.cursor()
@@ -184,13 +184,13 @@ def determine_last_entry():
         my_cursor.close()
         db.close()
 
-def check_if_db_exists():
+def check_if_db_exists(password):
     try:
         #connect to database
         db = mysql.connector.connect(
         host = 'localhost',
         user = 'root',
-        passwd = '8ad7fpx2!'
+        passwd = password
         )
         my_cursor = db.cursor(buffered=True)
         my_cursor.execute('SHOW DATABASES LIKE "nhlStats"')
@@ -205,7 +205,7 @@ def check_if_db_exists():
         print(e)
         raise
 
-def create_nhlStats_database():
+def create_nhlStats_database(password):
     queries = sql_script_to_queries(script_name='./sql_scripts/template.sql')
     for query in queries:
         try:
@@ -213,7 +213,7 @@ def create_nhlStats_database():
             db = mysql.connector.connect(
             host = 'localhost',
             user = 'root',
-            passwd = '8ad7fpx2!',
+            passwd = password,
             database = 'nhlStats'
             )
         except:
@@ -221,7 +221,7 @@ def create_nhlStats_database():
             db = mysql.connector.connect(
             host = 'localhost',
             user = 'root',
-            passwd = '8ad7fpx2!'
+            passwd = password
             )
         my_cursor = db.cursor()
         my_cursor.execute(query)

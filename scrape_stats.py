@@ -3,7 +3,7 @@ import requests
 from time import sleep
 import sort_stats
 
-def find_web_elements(player_url, player_id):
+def find_web_elements(player_url, player_id, password):
     # delay and request new player webpage
     sleep(4)
     req = requests.get(player_url)
@@ -29,7 +29,7 @@ def find_web_elements(player_url, player_id):
             raise
 
     # obtain all stats from all seasons from table
-    list_of_all_seasons = scrape_table(table, player_id, position)
+    list_of_all_seasons = scrape_table(table, player_id, position, password)
     return (player_dict, list_of_all_seasons)
 
 def find_position(player_dict):
@@ -40,7 +40,7 @@ def find_position(player_dict):
         position = value
     return position
 
-def scrape_table(table, player_id, position):
+def scrape_table(table, player_id, position, password):
     table_body = table.find('tbody')
     table_rows = table_body.find_all('tr')
     list_of_all_seasons = []
@@ -50,11 +50,11 @@ def scrape_table(table, player_id, position):
         season_id = '"' + stat_column_header.get_text() + '"'
         stat_column_body = row.find_all('td') # these are all stats
         if position != '"G"':
-            stats_lists = sort_stats.sort_player_stats(stat_column_body, player_id, season_id)
+            stats_lists = sort_stats.sort_player_stats(stat_column_body, player_id, season_id, password)
             list_of_all_seasons.append(stats_lists)
         elif position == None:
             position = "na"
         else:
-            stats_lists = sort_stats.sort_goalie_stats(stat_column_body, player_id, season_id)
+            stats_lists = sort_stats.sort_goalie_stats(stat_column_body, player_id, season_id, password)
             list_of_all_seasons.append(stats_lists)
     return list_of_all_seasons

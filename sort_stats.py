@@ -174,7 +174,7 @@ def sort_player_info(soup, player_url, player_id):
     
     return player_list
 
-def sort_player_stats(stat_column_body, player_id, season_id):
+def sort_player_stats(stat_column_body, player_id, season_id, password):
     season_info_list = []
     misc_stats_list = []
     scoring_list = []
@@ -197,7 +197,7 @@ def sort_player_stats(stat_column_body, player_id, season_id):
             goals_list.append({'team' : f'"{team}"'})
             assists_list.append({'team' : f'"{team}"'})
             shots_list.append({'team' : f'"{team}"'})
-            database_and_sql.add_team_to_database(f'"{team}"')
+            database_and_sql.add_team_to_database(f'"{team}"', password)
             team = True
         # team
         elif column.get('data-stat') == 'age':
@@ -302,7 +302,7 @@ def sort_player_stats(stat_column_body, player_id, season_id):
 
     if team != True:
         team = 'na'
-        database_and_sql.add_team_to_database(f'"{team}"')
+        database_and_sql.add_team_to_database(f'"{team}"', password)
         season_info_list.append({'team' : f'"{team}"'})
         misc_stats_list.append({'team' : f'"{team}"'})
         scoring_list.append({'team' : f'"{team}"'})
@@ -317,7 +317,7 @@ def sort_player_stats(stat_column_body, player_id, season_id):
                 stats_lists.pop(stats_lists.index(stat_list))
     return stats_lists
 
-def sort_goalie_stats(stat_column_body, player_id, season_id):
+def sort_goalie_stats(stat_column_body, player_id, season_id, password):
     season_info_list = []
     goalie_stats_list = []
     
@@ -333,7 +333,7 @@ def sort_goalie_stats(stat_column_body, player_id, season_id):
             team = column.get_text()
             season_info_list.append({'team' : f'"{team}"'})
             goalie_stats_list.append({'team' : f'"{team}"'})
-            database_and_sql.add_team_to_database(f'"{team}"')
+            database_and_sql.add_team_to_database(f'"{team}"', password)
             team = True
         # age
         elif column.get('data-stat') == 'age':
@@ -406,7 +406,7 @@ def sort_goalie_stats(stat_column_body, player_id, season_id):
 
     if team != True:
         team = 'na'
-        database_and_sql.add_team_to_database(f'"{team}"')
+        database_and_sql.add_team_to_database(f'"{team}"', password)
         season_info_list.append({'team' : f'"{team}"'})
         goalie_stats_list.append({'team' : f'"{team}"'})
 
