@@ -206,7 +206,7 @@ def check_if_db_exists(password):
         raise
 
 def create_nhlStats_database(password):
-    queries = sql_script_to_queries(script_name='./sql_scripts/template.sql')
+    queries = sql_script_to_queries(script_name='../sql_scripts/template.sql')
     for query in queries:
         try:
             #connect to database
