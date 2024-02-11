@@ -1,1 +1,0 @@
-SELECT * FROM players WHERE lastName = "Crosby";
