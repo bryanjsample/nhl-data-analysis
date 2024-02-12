@@ -27,7 +27,9 @@ USE nhlStats
 -- p.birthLocationSecondary as State,
 -- p.birthCountry as Country
 -- FROM players p
--- WHERE p.birthLocationSecondary IN ('Minnesota', 'Colorado')
+-- WHERE p.birthLocationPrimary IS NOT NULL 
+-- AND p.birthLocationSecondary IS NOT NULL
+-- AND p.birthCountry IS NOT NULL
 -- ORDER BY p.birthLocationSecondary, p.birthLocationPrimary;
 
 -- SELECT 
@@ -42,9 +44,10 @@ USE nhlStats
 -- INNER JOIN
 -- scoring s
 -- ON p.playerId = s.playerId
-;
+-- WHERE p.playerId = 'ottojo01'
+-- ;
 
--- WHERE p.playerId = 'nichuva01'
+
 
 -- SELECT 
 -- p.playerId as id,
@@ -64,4 +67,5 @@ USE nhlStats
 -- INNER JOIN
 -- miscStats m
 -- ON p.playerId = m.playerId
+-- WHERE p.playerId = 'gretzwa01'
 -- ;
