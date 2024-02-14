@@ -25,12 +25,15 @@ USE nhlStats
 -- p.lastName as LastName,
 -- p.birthLocationPrimary as City,
 -- p.birthLocationSecondary as State,
--- p.birthCountry as Country
+-- p.birthCountry as Country,
+-- p.birthdate as Birthday,
+-- p.weightLbs as Weight,
+-- p.heightInches as Height
 -- FROM players p
--- WHERE p.birthLocationPrimary IS NOT NULL 
--- AND p.birthLocationSecondary IS NOT NULL
--- AND p.birthCountry IS NOT NULL
+-- WHERE p.playerid = 'milanso01'
 -- ORDER BY p.birthLocationSecondary, p.birthLocationPrimary;
+
+-- SELECT * from seasonInfo WHERE playerId = 'milanso01';
 
 -- SELECT 
 -- p.playerId as id,
